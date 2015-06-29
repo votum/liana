@@ -1,0 +1,1 @@
+web: newrelic-admin run-program gunicorn --log-file=- --workers 12 --pythonpath server core.wsgi

@@ -1,0 +1,155 @@
+{% extends "rest_framework/base.html" %}
+{% load staticfiles %}
+{% load rest_framework %}
+
+{% block title %}Liana{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-static-top {% block bootstrap_navbar_variant %}navbar-inverse{% endblock %}">
+    <div class="container">
+        <span>
+               <a class='navbar-brand' rel="nofollow" href='/'>
+                Liana
+            </a>
+        </span>
+        <ul class="nav navbar-nav pull-right">
+            {% block userlinks %}
+                {% if user.is_authenticated %}
+                    {% optional_logout request user %}
+                {% else %}
+                    {% optional_login request %}
+                {% endif %}
+            {% endblock %}
+
+            <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="mailto:contact@lianakit.com">Contact us</a></li>
+        <li><a role="encoded"
+           href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Feedback&urlWeb=http://lianakit.com/&accentColor=534292">Feedback</a></li>
+        <li><a role="encoded"
+           href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=About&urlWeb=http://lianakit.com/&accentColor=534292">About</a></li>
+        <li><a role="encoded"
+           href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Privacy Policy&urlWeb=http://lianakit.com/&accentColor=534292">Privacy
+            Policy</a></li>
+        <li><a role="encoded"
+           href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Terms of Service&urlWeb=http://lianakit.com/&accentColor=534292">Terms
+            of Service</a></li>
+          </ul>
+        </li>
+
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block meta %}
+
+    <link rel="shortcut icon" type=image/png href="/static/images/favicon.png" sizes="16x16 32x32 64x64">
+    <meta charset="utf-8">
+    <meta name="robots" content="NONE,NOARCHIVE" />
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+{% endblock %}
+
+{% block style %}
+    {% block bootstrap_theme %}
+        <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
+
+    <style>
+
+
+html,
+body {
+  height: 100%;
+
+}
+
+a {
+  color: #534292;
+  text-decoration: none;
+}
+
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom, #664a86, #534292);
+  background-color: #534292;
+  color: #fff;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #534292;
+  border-color: #664a86;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, .h1 {
+  font-size: 25px;
+}
+
+
+.well .form-actions {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.well form {
+  margin-bottom: 0;
+}
+
+.nav-tabs {
+  border: 0;
+}
+
+.nav-tabs > li {
+  float: right;
+}
+
+.nav-tabs li a {
+  margin-right: 0;
+}
+
+.nav-tabs > .active > a {
+  background: #F5F5F5;
+}
+
+.nav-tabs > .active > a:hover {
+  background: #F5F5F5;
+}
+
+.tabbable.first-tab-active .tab-content {
+  border-top-right-radius: 0;
+}
+
+ul.breadcrumb {
+  margin: 0;
+}
+    </style>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58650764-9', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+{% endblock %}
+
+

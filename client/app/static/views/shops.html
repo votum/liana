@@ -1,0 +1,66 @@
+<div class="navbar navbar-static-top navbar-white">
+    <div class="container-fluid">
+        <a class="navbar-brand" rel="nofollow" ui-sref="home">
+            Liana
+        </a>
+        <ul class="nav navbar-nav pull-right">
+            <li><a ui-sref="shops">Shops</a></li>
+            <li><a href="/api/" target="_self">API</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="hero">
+    <div class="container-fluid">
+        <form class="form-inline">
+            <div class="form-group">
+                <input class="form-control" id="search" placeholder="What are you looking for...">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="searchClick()">Search
+            </button>
+        </form>
+
+    </div>
+</div>
+<div class="body">
+    <div class="container-fluid">
+
+        <h1>Shops</h1>
+
+        <div ng-show="!shops">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+
+        <div ng-show="shops">
+            <ul>
+                <li class="padding-top" ng-repeat="s in shops">{{s.shop}} <span
+                        class="meta">{{s.article_count}} articles</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container-fluid">
+        <div class="footer-links text-center">
+            <a href="mailto:contact@lianakit.com">Contact us</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Feedback&urlWeb=http://lianakit.com/&accentColor=534292">Feedback</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=About&urlWeb=http://lianakit.com/&accentColor=534292">About</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Privacy Policy&urlWeb=http://lianakit.com/&accentColor=534292">Privacy
+                Policy</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Terms of Service&urlWeb=http://lianakit.com/&accentColor=534292">Terms
+                of Service</a> &bull;
+            <a href="http://720dreams.com" target="_blank">© 2015, 720dreams LLC</a>
+        </div>
+    </div>
+</div>
+

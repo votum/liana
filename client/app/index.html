@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>Liana</title>
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+    <link rel="shortcut icon" type=image/png href="/static/images/favicon.png" sizes="16x16 32x32 64x64">
+
+    <!-- build:css(.tmp) static/styles/main.css -->
+    <link rel="stylesheet" href="static/styles/main.css">
+    <!-- endbuild -->
+</head>
+<body ng-app="clientApp">
+<!--[if lt IE 7]>
+<pclass="alert alert-warning">You are using an <strong>outdated</strong> browser. Please <a
+        href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<noscript>
+    <div style="margin: 5%; text-align: center" class="alert alert-danger" role="alert">Please enable JavaScript</div>
+</noscript>
+<!-- Add your site or application content here -->
+<div class="site-wrapper" ui-view></div>
+
+<!-- build:js(app) static/scripts/oldieshim.js -->
+<!--[if lt IE 9]>
+<script src="static/bower_components/es5-shim/es5-shim.js"></script>
+<script src="static/bower_components/json3/lib/json3.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js(app) static/scripts/vendor.js -->
+<script src="static/bower_components/lodash/lodash.js"></script>
+<script src="static/bower_components/angular/angular.js"></script>
+<script src="static/bower_components/restangular/dist/restangular.js"></script>
+<script src="static/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="static/bower_components/afkl-lazy-image/release/lazy-image.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) static/scripts/scripts.js -->
+<script src="static/scripts/app.js"></script>
+<script src="static/scripts/controllers/main.js"></script>
+<script src="static/scripts/controllers/shops.js"></script>
+<script src="static/scripts/controllers/article.js"></script>
+<!-- endbuild -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58650764-9', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+{% extends "rest_framework/api.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% load rest_framework %}
+
+{% block title %}Liana REST API{% endblock %}
+
+{% block meta %}
+    <meta charset="utf-8">
+    <meta name="robots" content="NONE,NOARCHIVE" />
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="shortcut icon" type=image/png href="/static/images/favicon.png" sizes="16x16 32x32 64x64">
+{% endblock %}
+
+{% block style %}
+    {% block bootstrap_theme %}
+        <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet" type="text/css">
+
+
+    <style>
+
+
+html,
+body {
+  height: 100%;
+
+}
+
+a {
+  color: #534292;
+  text-decoration: none;
+}
+
+
+.navbar-inverse {
+  background-image: linear-gradient(to bottom, #664a86, #534292);
+  background-color: #534292;
+  color: #fff;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #534292;
+  border-color: #664a86;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, .h1 {
+  font-size: 25px;
+}
+    </style>
+
+
+{% endblock %}
+
+    {% block body %}
+    <body class="container">
+
+        <div class="container-fluid" style="margin-top: 30px">
+            <div class="row-fluid">
+                <div style="width: 320px; margin-left: auto; margin-right: auto">
+                    <div class="row-fluid">
+                        <div>
+                            {% block branding %}<h3 style="margin: 0 0 20px;">Liana Login</h3>{% endblock %}
+                        </div>
+                    </div><!-- /row fluid -->
+        
+                    <div class="row-fluid">
+                        <div>
+                            <form action="{% url 'rest_framework:login' %}" role="form" method="post">
+                                {% csrf_token %}
+                                <div id="div_id_username"
+                                    class="clearfix control-group {% if form.username.errors %}error{% endif %}">
+                                    <div class="form-group">
+                                        <label for="id_username">Username:</label>
+                                        <input type="text" name="username" maxlength="100"
+                                            autocapitalize="off"
+                                            autocorrect="off" class="form-control textinput textInput"
+                                            id="id_username" required
+                                            {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+                                        {% if form.username.errors %}
+                                            <p class="text-error">
+                                                {{ form.username.errors|striptags }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                    <div id="div_id_password"
+                                        class="clearfix control-group {% if form.password.errors %}error{% endif %}">
+                                        <div class="form-group">
+                                        <label for="id_password">Password:</label>
+                                        <input type="password" name="password" maxlength="100"
+                                            autocapitalize="off" autocorrect="off" class="form-control textinput textInput"
+                                            id="id_password" required>
+                                        {% if form.password.errors %}
+                                            <p class="text-error">
+                                                {{ form.password.errors|striptags }}
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <input type="hidden" name="next" value="{{ next }}" />
+                                {% if form.non_field_errors %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="well well-small text-error" style="border: none">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="form-actions-no-box">
+                                    <input type="submit" name="submit" value="Log in" class="btn btn-primary form-control" id="submit-id-submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- /.row-fluid -->
+                </div><!--/.well-->
+            </div><!-- /.row-fluid -->
+        </div><!-- /.container-fluid -->
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58650764-9', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+    </body>
+    {% endblock %}

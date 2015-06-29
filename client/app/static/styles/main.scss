@@ -1,0 +1,315 @@
+@import "bootstrap";
+@import "bootstrap-theme";
+@import "flexboxgrid";
+
+$main-color: #534292;
+$second-color: #664a86;
+
+html,
+body {
+  height: 100%;
+  background-color: $main-color;
+
+  a,
+  a:focus,
+  a:hover {
+    color: $main-color;
+  }
+
+}
+
+pre {
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+h1, .h1 {
+  font-size: 25px;
+  margin-top: 0px;
+}
+
+h2, .h2 {
+  font-size: 20px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  color: $main-color;
+  background-color: #eeeeee;
+}
+
+.navbar-brand, .navbar-nav > li > a {
+  text-shadow: none;
+}
+
+.tag-cloud {
+  max-width: 500px;
+  margin: 0px auto;
+  text-align: center;
+
+  a {
+    padding: 0 2px;
+    text-transform: capitalize;
+  }
+}
+
+.margin-top {
+  margin-top: 10px;
+}
+
+.card {
+  border: 1px dotted rgba($main-color, 0.1);
+  padding: 10px;
+}
+
+.search-results-item {
+  border-top: 1px dotted rgba($main-color, 0.4);
+  padding: 15px 0;
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+hr {
+  border: 0;
+  border: 1px dotted rgba($main-color, 0.4);
+}
+
+.card, .search-results-item {
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  h4 {
+    color: $main-color;
+  }
+
+  .description {
+    color: #333333;
+    max-height: 100px;
+    overflow: hidden;
+
+    div {
+      overflow: hidden;
+    }
+  }
+  .price {
+    color: $second-color;
+  }
+}
+
+.label {
+  margin-right: 3px;
+}
+
+.image {
+
+  margin: 5px 0;
+  height: 150px;
+  img {
+    height: 150px;
+    max-width: 100%;
+  }
+}
+
+.hero {
+  background-image: linear-gradient(to bottom, $second-color, $main-color);
+  background-color: $second-color;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+
+.container-fluid {
+  max-width: 1024px;
+}
+
+.navbar {
+  margin-bottom: 0px !important;
+  background-color: white;
+
+  .navbar-white {
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    background-color: white;
+  }
+
+}
+
+a {
+  color: $main-color;
+  text-decoration: none;
+}
+
+#search {
+  width: 640px;
+}
+
+.search-form {
+  text-align: center;
+
+  #search {
+    height: 60px;
+    width: 640px;
+  }
+
+  .btn {
+    height: 60px;
+  }
+}
+
+.padding-top {
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+
+  .form-group {
+    margin-top: 10px !important;
+  }
+
+  #search {
+    width: 100%;
+  }
+
+  .search-form {
+    margin-top: 0px;
+    #search {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .btn {
+    width: 100%;
+    display: block;
+    margin: 5px 0;
+  }
+}
+
+.btn-primary {
+  background-image: linear-gradient(to bottom, $main-color 0, $second-color 100%);
+  background-color: $main-color;
+  border-color: $second-color;
+}
+
+.spinner {
+  margin: 20px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: $main-color;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.label {
+  white-space: normal;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0.0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  }
+  40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.footer-links {
+  color: rgba(255, 255, 255, .4);
+
+  a {
+    color: rgba(255, 255, 255, .4);
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.meta {
+  color: rgba($main-color, .4);
+}
+
+.meta-bg {
+  background-color: rgba($main-color, .4);
+}
+
+.article-detail-property {
+  margin-top: 15px;
+}
+
+.article-detail-description {
+  max-width: 500px;
+}
+
+.article-detail-image img, .article-detail-image.image {
+  height: 200px;
+  max-width: 100%;
+}
+
+.article-detail-tags {
+  .label {
+    margin-right: 3px;
+  }
+}
+
+.random-articles, .like-articles {
+  h5 {
+    font-size: 14px;
+  }
+}
+
+.like-articles {
+  .image, img {
+    height: 100px
+  }
+}
+
+.body {
+  padding: 20px 15px;
+  background-color: white;
+  min-height: 60vh;
+}
+
+.footer {
+  padding: 30px 0;
+}
+

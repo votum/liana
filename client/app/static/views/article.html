@@ -1,0 +1,134 @@
+<div class="navbar navbar-static-top navbar-white">
+    <div class="container-fluid">
+        <a class="navbar-brand" rel="nofollow" ui-sref="home">
+            Liana
+        </a>
+        <ul class="nav navbar-nav pull-right">
+            <li><a ui-sref="shops">Shops</a></li>
+            <li><a href="/api/" target="_self">API</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="hero">
+    <div class="container-fluid">
+        <form class="form-inline">
+            <div class="form-group">
+                <input class="form-control" id="search" placeholder="What are you looking for...">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="searchClick()">Search
+            </button>
+        </form>
+
+    </div>
+</div>
+
+<div class="body">
+    <div class="container-fluid">
+        <div ng-show="!article">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+        <div ng-show="article" itemscope itemtype="http://schema.org/Product">
+
+            <h1 itemprop="name">{{article.title}}</h1>
+
+            <div class="row top-sm">
+                <div class="col-sm-4 col-xs-12">
+                    <div ng-show="article.image">
+                        <meta itemprop="image" content="{{article.image}}">
+                        <div afkl-lazy-image="{{article.image}}"
+                             afkl-lazy-image-options='{"offset": 200}'
+                             class="afkl-lazy-wrapper image article-detail-image text-center">
+                        </div>
+                    </div>
+                    <div ng-if="!article.image">
+                        <div class="image article-detail-image  text-center">
+                            <img src="/static/images/no-thumb.00d17b0f.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <div itemprop="price" class="label label-danger" ng-show="article.price">Price: {{article.price}}
+                    </div>
+                    <div itemprop="brand" class="label label-info">{{article.shop}}</div>
+
+                    <div itemprop="description" class="article-detail-description article-detail-property"
+                         ng-show="article.description"
+                         ng-bind-html="article.description| trust"></div>
+
+                    <div class="article-detail-tags article-detail-property" ng-show="article.tags">
+                        <a itemprop="category" class="label label-default" ng-repeat="t in article.tags"
+                           ui-sref="home({ q: t })">{{t}}</a>
+                    </div>
+
+                    <div itemprop="availability" class="article-detail-availability article-detail-property meta">
+                        {{article.availability}}
+                    </div>
+
+                    <a class="btn-lg article-detail-property btn btn-primary" href="{{article.shop_url}}"
+                       target="_blank">Buy</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="like-articles" ng-show="article">
+
+            <hr>
+
+            <h4>More like <em>'{{article.title}}'</em></h4>
+
+            <div ng-hide="likeArticles">
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="likeArticles">
+                <a class="col-sm-6 col-md-3 col-xs-12 card" ng-repeat="r in likeArticles"
+                   ui-sref="article({ articleId: r.id })">
+                    <div ng-if="r.image">
+                        <div afkl-lazy-image="{{r.image}}"
+                             afkl-lazy-image-options='{"offset": 200}'
+                             class="afkl-lazy-wrapper image text-center">
+                        </div>
+                    </div>
+                    <div ng-if="!r.image">
+                        <div class="afkl-lazy-wrapper image text-center">
+                            <img src="/static/images/no-thumb.00d17b0f.png">
+                        </div>
+                    </div>
+                    <h5>{{r.title}}</h5>
+
+                    <div class="label label-danger" ng-show="r.price">Price: {{r.price}}</div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="footer">
+    <div class="container-fluid">
+
+        <div class="footer-links text-center">
+            <a href="mailto:contact@lianakit.com">Contact us</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Feedback&urlWeb=http://lianakit.com/&accentColor=534292">Feedback</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=About&urlWeb=http://lianakit.com/&accentColor=534292">About</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Privacy Policy&urlWeb=http://lianakit.com/&accentColor=534292">Privacy
+                Policy</a> &bull;
+            <a role="encoded"
+               href="http://720dreams.com/views.html?contactEmail=contact@lianakit.com&name=LianaKit&title=Terms of Service&urlWeb=http://lianakit.com/&accentColor=534292">Terms
+                of Service</a> &bull;
+            <a href="http://720dreams.com" target="_blank">© 2015, 720dreams LLC</a>
+        </div>
+    </div>
+</div>
