@@ -29,30 +29,6 @@ Run the django development server:
     cd server
     python manage.py runserver_plus
 
-### Developing locally with Foreman
-
-If you want to execute your local development environment in the same manner as the remote environment
-you can use [Foreman](https://github.com/ddollar/foreman) (it’s installed automatically by the Heroku Toolbelt) to run your Procfile-backed app.
-
-Build your client:
-
-    cd client
-    grunt build
-
-Set `DJANGO_DEBUG=False` in `server/.env` and collect the static files:
-
-    cd server
-    ./manage.py collectstatic --noinput
-
-Run foreman:
-
-    foreman start -e server/.env
-
-
-This ensures that incompatibilities and hard to find bugs are caught before deploying to
-production and treats the application as a holistic unit instead of a series of individual
-commands working independently.
-
 #####AngularJs Client
 
 All client dependencies are managed by npm and bower:
