@@ -1,7 +1,7 @@
 Liana
 =====
 
-Bootstraped with [djng](https://github.com/djng/djng)
+Bootstrapped with [djng](https://github.com/djng/djng)
 
 Prerequisites
 -------------
