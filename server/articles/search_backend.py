@@ -31,7 +31,7 @@ class SearchBackend(object):
         if settings.ES_SSL_URL:
             es = Elasticsearch([settings.ES_SSL_URL])
             kwars['index'] = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'liana_documents')
-
+            kwars['request_timeout'] = 60
             return es.search(**kwars)
 
         return {}
