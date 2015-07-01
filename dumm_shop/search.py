@@ -3,25 +3,45 @@
 # Copyright (c) maersu. All rights reserved.
 #
 # Created on 6/19/15
+import os
 from elasticsearch import Elasticsearch
+import sys
 
 
-es = Elasticsearch(['https://paas:2636041f3de3037424261e53f3eac4a7@kili-eu-west-1.searchly.com'])
+def print_res(data):
+    hits = data['hits']['hits']
+
+    print("Got %d Hits:" % data['hits']['total'])
+    print("Got %d Hits:" % len(hits))
+    print("Got %d" % sys.getsizeof(hits))
+    print res.keys()
+
+    if len(hits):
+        print 'First elem %s ' % hits[0]['_source']
+
+
+ES_SSL_URL = os.environ.get('ELASTIC_SSL_URL')
+es = Elasticsearch([ES_SSL_URL])
 
 body = {
     "query": {
-        "fuzzy": {
-            "text": "Sonos"
-        }
-    }}
+        "match_all": {}
+    },
+    "size": 10000
+}
 
 res = es.search(index="liana_documents",
-                body=body)  # res = es.search(index="liana_documents", body={"query": {"match_all": {}}})
+                scroll="1h",
+                search_type="scan",
+                body=body)
+
+scroll_id = res['_scroll_id']
+print scroll_id
 
 
-print res['hits'].keys()
-print("Got %d Hits:" % res['hits']['total'])
-for hit in res['hits']['hits']:
-    del hit['_source']['description']
-    del hit['_source']['text']
-    print(hit['_score'], hit['_source'])
+for r in range(1,3):
+    res = es.scroll(scroll_id=scroll_id, scroll="1h")
+
+    print res['_scroll_id']
+    print_res(res)
+

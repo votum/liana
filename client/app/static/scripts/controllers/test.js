@@ -2,17 +2,30 @@
 
 angular.module('clientApp')
     .controller('TestCtrl', ['$scope', '$http', function ($scope, $http) {
-        var start;
-        var clear = function () {
-            $scope.numberOfrequets = 0;
-            $scope.numberOfObjects = 0;
-            $scope.objectsPerSecond = 0;
-            $scope.currentUrl = '/api/articles/';
-            start = new Date().getTime();
-            $scope.timeUsed = 0;
-        };
+        var start,
+            baseUrl,
+            clear = function () {
+                $scope.numberOfrequets = 0;
+                $scope.numberOfObjects = 0;
+                $scope.objectsPerSecond = 0;
+                $scope.currentUrl = '';
+                start = new Date().getTime();
+                $scope.timeUsed = 0;
+            };
+
         clear();
         $scope.inProgress = false;
+
+        var startCallApi = function (url) {
+            clear();
+            var pageSize = document.getElementById('page-size').value;
+            if (pageSize) {
+                url = url + '?page_size=' + pageSize;
+            }
+            $scope.inProgress = true;
+            // start api call recursive
+            callApi(url);
+        };
 
         var callApi = function (url) {
             $scope.numberOfrequets++;
@@ -29,12 +42,19 @@ angular.module('clientApp')
                         $scope.objectsPerSecond = ($scope.numberOfObjects / $scope.timeUsed).toFixed(2);
                     }
 
-                    // check if finished
                     if (data.next) {
+
+                        // handle normal api call
                         callApi(data.next);
-                    } else {
-                        $scope.inProgress = false;
+                    } else if (data.scroll_id) {
+
+                        // handle scroll api call
+                        callApi(baseUrl + '?scroll_id=' + data.scroll_id);
                     }
+
+
+                    // finished
+                    $scope.inProgress = false;
 
                 }).error(function (data) {
                     if (data) {
@@ -44,19 +64,14 @@ angular.module('clientApp')
                 });
         };
 
-        // start api call recursive
         $scope.start = function () {
-            clear();
-
-            var url = '/api/articles/';
-            var pageSize = document.getElementById('page-size').value;
-
-            if (pageSize) {
-                url = url + '?page_size=' + pageSize;
-                $scope.inProgress = true;
-            }
-
-            callApi(url);
+            startCallApi('/api/articles/');
         };
+
+        $scope.startScroll = function () {
+            baseUrl = '/api/articles/scroll/';
+            startCallApi(baseUrl);
+        };
+
 
     }]);

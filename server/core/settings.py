@@ -207,6 +207,7 @@ if ES_SSL_URL:
             'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
             'URL': es.scheme + '://' + es.hostname + ':' + str(port),
             'INDEX_NAME': 'liana_documents',
+            #'INDEX_NAME': 'stage',
             'TIMEOUT': 999999,
             'KWARGS': {
                 'port': port,

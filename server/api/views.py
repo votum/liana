@@ -93,6 +93,15 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
         /api/articles/random/?count=4
 
+    use scroll
+    This is a efficient way to retrieve a huge set of documents.
+    Returns a scroll_id and a result set. The scroll_id may change over the course of multiple calls and so it is required to always
+    pass the most recent scroll_id as the scroll_id for the subsequent request
+
+        /api/articles/scroll/?page_size=10000
+        /api/articles/scroll/?scroll_id=<Base-64 encoded string>
+
+
     """
 
     queryset = Article.objects.all()
@@ -100,6 +109,18 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         return Response(SearchBackend.get_article(pk))
+
+    @list_route()
+    def scroll(self, request):
+        page_size = request.GET.get('page_size', 10000)
+        scroll_id = request.GET.get('scroll_id')
+
+        results, scroll_id = SearchBackend.scroll(page_size, scroll_id)
+
+        if len(results) == 0:
+            scroll_id = None
+
+        return Response({'results': results, 'scroll_id': scroll_id})
 
     @list_route()
     def random(self, request):

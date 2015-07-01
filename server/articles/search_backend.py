@@ -30,7 +30,7 @@ class SearchBackend(object):
     def es_search(**kwars):
         if settings.ES_SSL_URL:
             es = Elasticsearch([settings.ES_SSL_URL])
-            kwars['index'] = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'liana_documents')
+            kwars['index'] = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'documents')
             kwars['request_timeout'] = 60
             return es.search(**kwars)
 
@@ -39,7 +39,7 @@ class SearchBackend(object):
     @staticmethod
     def search_stats():
         if settings.ES_SSL_URL:
-            index = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'liana_documents')
+            index = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'documents')
 
             es = urlparse.urlparse(settings.ES_SSL_URL)
 
@@ -56,12 +56,7 @@ class SearchBackend(object):
         return {}
 
     @staticmethod
-    def get_results_from_search(body, max_queries):
-        res = SearchBackend.es_search(body=body, size=max_queries)
-
-        if not res:
-            return {}, 0
-
+    def process_results(res):
         results = []
         for hit in res['hits']['hits']:
             source = hit['_source']
@@ -72,6 +67,17 @@ class SearchBackend(object):
             if source.get('tags'):
                 source['tags'] = source['tags'].split(', ')
             results.append(source)
+
+        return results
+
+    @staticmethod
+    def get_results_from_search(body, max_queries):
+        res = SearchBackend.es_search(body=body, size=max_queries)
+
+        if not res:
+            return {}, 0
+
+        results = SearchBackend.process_results(res)
 
         return results[:settings.MAX_QUERIES], res['hits']['total']
 
@@ -252,3 +258,29 @@ class SearchBackend(object):
         result['tagcloud']['terms'] = [t for t in result['tagcloud']['terms'] if len(t['term']) > 3][:size]
 
         return result
+
+    @staticmethod
+    def scroll(page_size, scroll_id=None):
+
+        if page_size < 1 or not settings.ES_SSL_URL:
+            return {}
+
+        es = Elasticsearch([settings.ES_SSL_URL])
+        index = settings.HAYSTACK_CONNECTIONS.get('default', {}).get('INDEX_NAME', 'documents')
+        request_timeout = 60
+
+        if not scroll_id:
+            body = {
+                "query": {
+                    "match_all": {}
+                },
+                "size": page_size
+            }
+
+            res = es.search(body=body, search_type='scan', scroll="1h", index=index, request_timeout=request_timeout)
+            scroll_id = res['_scroll_id']
+
+        res = es.scroll(scroll_id=scroll_id, scroll="1h", request_timeout=request_timeout)
+        scroll_id = res.get('_scroll_id', None)
+
+        return SearchBackend.process_results(res), scroll_id
