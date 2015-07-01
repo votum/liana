@@ -16,6 +16,23 @@ Prerequisites
  * Installed [postgresql](http://www.postgresql.org/)
  * Optional [elasticsearch](https://www.elastic.co/)
 
+
+Installation
+------------
+
+#####Python/Django
+
+    mkdir venv
+    virtualenv --no-site-packages venv
+    pip install -r requirements_dev.txt
+
+#####AngularJs
+
+    cd client
+    npm install
+    bower install
+
+
 Developing
 ----------
 Watch for changes in your client:
@@ -28,14 +45,6 @@ Run the django development server:
     source venv/bin/activate
     cd server
     python manage.py runserver_plus
-
-#####AngularJs Client
-
-All client dependencies are managed by npm and bower:
-
-    cd client
-    npm install
-    bower install
 
 Crawling
 --------
