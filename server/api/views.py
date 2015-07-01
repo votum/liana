@@ -83,7 +83,7 @@ class ArticleSerializerList(serializers.ModelSerializer):
 class ArticleViewSet(viewsets.ModelViewSet):
     """
 
-    param page_size (default=10000, max=50000)
+    param page_size (default=1000, max=50000)
 
         /api/articles/?page_size=100
 
@@ -95,8 +95,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     use scroll
     This is a efficient way to retrieve a huge set of documents.
-    Returns a scroll_id and a result set. The scroll_id may change over the course of multiple calls and so it is required to always
-    pass the most recent scroll_id as the scroll_id for the subsequent request
+    Returns a scroll_id and a result set. The scroll_id may change over the course of multiple
+    calls and so it is required to always pass the most recent scroll_id as the scroll_id for the subsequent request.
+    As long there is a scroll_id there is an other data set
 
         /api/articles/scroll/?page_size=10000
         /api/articles/scroll/?scroll_id=<Base-64 encoded string>
@@ -112,15 +113,16 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     @list_route()
     def scroll(self, request):
-        page_size = request.GET.get('page_size', 10000)
+        page_size = request.GET.get('page_size', 1000)
         scroll_id = request.GET.get('scroll_id')
 
         results, scroll_id = SearchBackend.scroll(page_size, scroll_id)
+        resp = {'results': results}
 
-        if len(results) == 0:
-            scroll_id = None
+        if scroll_id:
+            resp['scroll_id'] = scroll_id
 
-        return Response({'results': results, 'scroll_id': scroll_id})
+        return Response(resp)
 
     @list_route()
     def random(self, request):

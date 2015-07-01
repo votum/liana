@@ -283,4 +283,8 @@ class SearchBackend(object):
         res = es.scroll(scroll_id=scroll_id, scroll="1h", request_timeout=request_timeout)
         scroll_id = res.get('_scroll_id', None)
 
-        return SearchBackend.process_results(res), scroll_id
+        results = SearchBackend.process_results(res)
+        if len(results) == 0:
+            return results, None
+
+        return results, scroll_id
