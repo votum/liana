@@ -1,3 +1,4 @@
+from api.pagination import LargeResultsSetPagination
 from articles.models import Article
 from articles.search_backend import SearchBackend
 from crawl.models import IndexStatus
@@ -82,6 +83,10 @@ class ArticleSerializerList(serializers.ModelSerializer):
 class ArticleViewSet(viewsets.ModelViewSet):
     """
 
+    param page_size (default=1000, max=10'000)
+
+        /api/articles/?page_size=100
+
     **actions:**
 
     get random selection with
@@ -92,7 +97,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    pagination_class = PageNumberPagination
 
     def retrieve(self, request, pk=None):
         return Response(SearchBackend.get_article(pk))

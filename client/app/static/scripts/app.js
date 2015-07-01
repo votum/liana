@@ -37,6 +37,11 @@ angular
                 url: '/shops/',
                 templateUrl: 'static/views/shops.html',
                 controller: 'ShopsCtrl'
+            })
+            .state('test', {
+                url: '/test/',
+                templateUrl: 'static/views/test.html',
+                controller: 'TestCtrl'
             });
 
     }).run(['$rootScope', '$state', function ($rootScope, $state) {
