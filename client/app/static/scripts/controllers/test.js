@@ -50,11 +50,12 @@ angular.module('clientApp')
 
                         // handle scroll api call
                         callApi(baseUrl + '?scroll_id=' + data.scroll_id);
+                    } else {
+
+                        // finished
+                        $scope.inProgress = false;
                     }
 
-
-                    // finished
-                    $scope.inProgress = false;
 
                 }).error(function (data) {
                     if (data) {
