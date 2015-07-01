@@ -37,11 +37,19 @@ All client dependencies are managed by npm and bower:
     npm install
     bower install
 
-###Serving static assets
+Crawling
+--------
 
-All static assets are served by [WhiteNoise](http://whitenoise.evans.io/en/latest/) in production to keep things simple.
-During local development the files are served by the [django.contrib.staticfile](https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#module-django.contrib.staticfiles)
-app directly from the client directory.
+    source venv/bin/activate
+    cd server
+    python manage.py crawl_shops -f ottos,galaxus -s 100
 
-**Note:** As this is a SPA Django needs to catch all URLs handled by the client and return the index.html.
-Therefore this URL pattern has to come last in your `urls.py` as it would otherwise override all other url definitions.
+
+Elastic Search
+--------------
+
+    EXPORT ELASTIC_SSL_URL=https://user:pw@domain.com
+
+    source venv/bin/activate
+    cd server
+    python manage.py rebuild_index
