@@ -37,7 +37,10 @@ angular.module('clientApp')
                     }
 
                 }).error(function (data) {
-                    window.alert(data);
+                    if (data) {
+                        window.alert(data);
+                        $scope.inProgress = false;
+                    }
                 });
         };
 
