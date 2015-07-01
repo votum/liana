@@ -89,15 +89,18 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     **actions:**
 
-    get random selection with
+    random
+
+    returns a random selection
 
         /api/articles/random/?count=4
 
-    use scroll
+    scroll
+
     This is a efficient way to retrieve a huge set of documents.
     Returns a scroll_id and a result set. The scroll_id may change over the course of multiple
     calls and so it is required to always pass the most recent scroll_id as the scroll_id for the subsequent request.
-    As long there is a scroll_id there is an other data set
+    As long as there is a scroll_id there is an other data set.
 
         /api/articles/scroll/?page_size=10000
         /api/articles/scroll/?scroll_id=<Base-64 encoded string>
