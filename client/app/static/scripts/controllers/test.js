@@ -6,7 +6,7 @@ angular.module('clientApp')
         var clear = function () {
             $scope.numberOfrequets = 0;
             $scope.numberOfObjects = 0;
-            $scope.currentUrl = '';
+            $scope.currentUrl = '/api/articles/';
         };
         clear();
         $scope.inProgress = false;
