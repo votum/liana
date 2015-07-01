@@ -48,7 +48,7 @@ Crawling
 Elastic Search
 --------------
 
-    EXPORT ELASTIC_SSL_URL=https://user:pw@domain.com
+    export ELASTIC_SSL_URL=https://user:pw@domain.com
 
     source venv/bin/activate
     cd server
