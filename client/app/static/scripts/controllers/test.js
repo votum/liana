@@ -6,6 +6,7 @@ angular.module('clientApp')
         var clear = function () {
             $scope.numberOfrequets = 0;
             $scope.numberOfObjects = 0;
+            $scope.objectsPerSecond = 0;
             $scope.currentUrl = '/api/articles/';
             start = new Date().getTime();
             $scope.timeUsed = 0;
@@ -21,9 +22,12 @@ angular.module('clientApp')
 
                     $scope.article = data;
                     $scope.numberOfObjects = $scope.numberOfObjects + data.results.length;
-
                     var end = new Date().getTime();
                     $scope.timeUsed = (end - start) / 1000.0;
+
+                    if ($scope.timeUsed) {
+                        $scope.objectsPerSecond = ($scope.numberOfObjects / $scope.timeUsed).toFixed(2);
+                    }
 
                     // check if finished
                     if (data.next) {
