@@ -2,11 +2,13 @@
 
 angular.module('clientApp')
     .controller('TestCtrl', ['$scope', '$http', function ($scope, $http) {
-
+        var start;
         var clear = function () {
             $scope.numberOfrequets = 0;
             $scope.numberOfObjects = 0;
             $scope.currentUrl = '/api/articles/';
+            start = new Date().getTime();
+            $scope.timeUsed = 0;
         };
         clear();
         $scope.inProgress = false;
@@ -19,6 +21,9 @@ angular.module('clientApp')
 
                     $scope.article = data;
                     $scope.numberOfObjects = $scope.numberOfObjects + data.results.length;
+
+                    var end = new Date().getTime();
+                    $scope.timeUsed = (end - start) / 1000.0;
 
                     // check if finished
                     if (data.next) {

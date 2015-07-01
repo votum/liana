@@ -83,7 +83,7 @@ class ArticleSerializerList(serializers.ModelSerializer):
 class ArticleViewSet(viewsets.ModelViewSet):
     """
 
-    param page_size (default=1000, max=10'000)
+    param page_size (default=1000, max=50'000)
 
         /api/articles/?page_size=100
 
