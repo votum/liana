@@ -44,7 +44,7 @@ angular.module('clientApp')
 
                     if (data.next) {
 
-                        // handle normal api call
+                        // handle standard api call
                         callApi(data.next);
                     } else if (data.scroll_id) {
 
