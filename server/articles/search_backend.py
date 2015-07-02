@@ -63,6 +63,9 @@ class SearchBackend(object):
             source['id'] = int(source['django_id'])
             del source['django_id']
             del source['django_ct']
+            del source['created']
+            del source['modified']
+            del source['text']
 
             if source.get('tags'):
                 source['tags'] = source['tags'].split(', ')
