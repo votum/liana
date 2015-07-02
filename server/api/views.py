@@ -90,6 +90,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     ### [Scroll](#scroll)
 
+    **EXPERIMENTAL**
+
     This is the most efficient way to retrieve a huge set of documents. It's a simple interface to the
     [Elasticsearch Scroll Api](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html).
 
