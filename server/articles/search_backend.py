@@ -290,4 +290,4 @@ class SearchBackend(object):
         if len(results) == 0:
             return results, None
 
-        return results, scroll_id
+        return results, scroll_id, res['hits']['total']

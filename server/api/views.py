@@ -143,8 +143,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if page_size > LargeResultsSetPagination.max_page_size:
             page_size = LargeResultsSetPagination.max_page_size
 
-        results, scroll_id = SearchBackend.scroll(page_size, scroll_id)
-        resp = {'results': results}
+        results, scroll_id, count = SearchBackend.scroll(page_size, scroll_id)
+        resp = {'results': results, 'count': count}
 
         if scroll_id:
             resp['scroll_id'] = scroll_id

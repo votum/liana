@@ -8,6 +8,8 @@ angular.module('clientApp')
                 $scope.numberOfrequets = 0;
                 $scope.numberOfObjects = 0;
                 $scope.objectsPerSecond = 0;
+                $scope.totalNumberOfObjects = 0;
+                $scope.estimatedTime = 0;
                 $scope.currentUrl = '';
                 start = new Date().getTime();
                 $scope.timeUsed = 0;
@@ -40,6 +42,11 @@ angular.module('clientApp')
 
                     if ($scope.timeUsed) {
                         $scope.objectsPerSecond = ($scope.numberOfObjects / $scope.timeUsed).toFixed(2);
+                    }
+
+                    if (data.count) {
+                        $scope.totalNumberOfObjects = data.count;
+                        $scope.estimatedTime = (($scope.totalNumberOfObjects / $scope.objectsPerSecond) / 60.0).toFixed(2);
                     }
 
                     if (data.next) {
