@@ -82,26 +82,44 @@ class ArticleSerializerList(serializers.ModelSerializer):
 
 class ArticleViewSet(viewsets.ModelViewSet):
     """
-
     param page_size (default=1000, max=10000)
 
         /api/articles/?page_size=100
 
     ## Actions
 
-    ### Scroll
+    ### [Scroll](#scroll)
 
-    This is the most efficient way to retrieve a huge set of documents.
+    This is the most efficient way to retrieve a huge set of documents. It's a simple interface to the
+    [Elasticsearch Scroll Api](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html).
 
-    The call returns a scroll_id and a result set. The scroll_id may change over the course of multiple
-    calls and so it is required to always pass the most recent scroll_id as the scroll_id for the subsequent request.
+    The first call takes an optional paramater page_size (default=1000, max=10000) and returns the first scroll_id (a Base-64 encoded string) and a result set (Array with articles)
+
+        /api/articles/scroll/?page_size=100
+
+    Returns
+
+        {
+            "scroll_id": "c2Nhbjs2OzM0NDg1ODpzRlBLc0FXNlNyNm5JWUc1",
+            "results": [
+                {
+                "title": "Example"
+                ...
+                }
+                ...
+            ]
+        }
+
+    The scroll_id may change over the course of multiple calls and so it is required to always pass the most recent scroll_id as the scroll_id for the subsequent request.
+
+        # >= 2nd call (paramter scroll_id will be ignored)
+        /api/articles/scroll/?scroll_id=c2Nhbjs2OzM0NDg1ODpzRlBLc0FXNlNyNm5JWUc1
 
     As long as there is a scroll_id there is an other data set.
 
-        /api/articles/scroll/?page_size=10000
-        /api/articles/scroll/?scroll_id=<Base-64 encoded string>
+    There is an [example implementation](/test/). Click button 'Use scrolling'.
 
-    ### Random
+    ###  [Random](#random)
 
     returns a random selection
 
