@@ -117,7 +117,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     @list_route()
     def scroll(self, request):
-        page_size = int(request.GET.get('page_size', 1000))
+        page_size = int(request.GET.get('page_size', LargeResultsSetPagination.page_size))
         scroll_id = request.GET.get('scroll_id')
 
         if page_size > LargeResultsSetPagination.max_page_size:
