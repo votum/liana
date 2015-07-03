@@ -51,7 +51,7 @@ Crawling
 
     source venv/bin/activate
     cd server
-    python manage.py crawl_shops -f ottos,galaxus -s 100
+    python manage.py crawl_shops -f otto,galaxus -s 100
 
 
 Elastic Search

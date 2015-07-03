@@ -200,4 +200,4 @@ class Parser(object):
 
     @staticmethod
     def purify_text(text):
-        return ' '.join(text.replace('\n', ' ').replace('\r', ' ').replace('  ', ' ').strip().split())
+        return ' '.join(text.replace('\n', ' ').replace('\r', ' ').replace('<', ' <').replace('  ', ' ').strip().split())
